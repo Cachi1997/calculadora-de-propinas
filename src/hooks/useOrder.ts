@@ -21,8 +21,14 @@ const useOrder = () => {
     }
   };
 
+  const removeItem = (id: MenuItem["id"]) => {
+    const updatedOrder = order.filter((item) => item.id !== id);
+    setOrder(updatedOrder);
+  };
+
   return {
     addItem,
+    removeItem,
     order,
   };
 };
