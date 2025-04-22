@@ -1,54 +1,58 @@
-# React + TypeScript + Vite
+# Calculadora de Propinas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Es una (SPA) **Single Page Application** interactiva para gestionar un pedido de menú y calcular la propina aplicada, construida con **Vite**, **React** y **TypeScript**, y desplegada en **Netlify**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo en Vivo
 
-## Expanding the ESLint configuration
+[Probar la aplicación en Netlify](https://comfy-buttercream-37ce15.netlify.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Características
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- **Listado de Menú**  
+  Muestra 12 ítems de comida y bebida con nombre y precio, cargados desde un arreglo estático (`data/db.ts`)
+- **Custom Hook `useOrder`**  
+  Toda la lógica de estado —añadir/eliminar ítems, cálculo de subtotal, propina y total— está encapsulada en el hook personalizado `useOrder` (`src/hooks/useOrder.ts`) para un código más limpio y reutilizable.
+- **Agregar y Eliminar Ítems**
+  - Añade productos al pedido con un clic en “Menú”.
+  - Elimina un producto específico desde la sección “Consumo”.
+  - Limpia todo el pedido usando el botón **Guardar Orden**, que reinicia el estado interno
+- **Selección de Propina**
+  - Opciones de radio para 10%, 20% y 50%.
+  - Actualiza la propina seleccionada en tiempo real
+- **Cálculo de Totales**
+  - **Subtotal**: suma de (precio × cantidad) para cada ítem.
+  - **Propina**: subtotal × porcentaje seleccionado.
+  - **Total a Pagar**: subtotal + propina.
+  - Despliega todo en la sección “Totales y propina”
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+## Tecnologías
+
+- **Vite** ^6.3.1 (bundler y servidor de desarrollo)
+- **React** ^19.0.0 y **ReactDOM** ^19.0.0 (biblioteca de UI)
+- **TypeScript** ~5.7.2 (tipado estático)
+- **Tailwind CSS** ^4.1.4 (estilos utility‑first)
+- **Custom Hook**: `useOrder` para centralizar la lógica de gestión de pedidos y propinas.
+- **ESLint** con plugins para React y Hooks (calidad de código)
+- **Netlify** (hosting del frontend)
+
+---
+
+## Instalación y Uso
+
+1. **Clonar el repositorio**
+
+```bash
+git clone https://github.com/Cachi1997/calculadora-de-propinas.git
+
+cd calculadora-de-propinas
+
+npm install
+
+npm run dev
 ```
